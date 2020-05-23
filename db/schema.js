@@ -13,10 +13,3 @@ module.exports = mongoose.model("Arist", artistSchema);
 //mongoose schema defines the structure of the document, default values etc.
 //mongoose model provides an interface to the db for creating, querying, updating and deleting records.
 //calling mongoose.model on a schema, mongoose compiles a model for you.
-
-/* artist details:
-ID
-username
-password
-payment pointer (wallet)
-about me section */

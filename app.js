@@ -1,14 +1,29 @@
 const express = require("express");
 const app = express();
 const cors = require("cors"); //cross-origin resource sharing
+const apiRouter = require("./routers/apiRouter.js");
 const mongoose = require("mongoose");
 const dbConfig = require("./db/config.js"); //database configuration username/pwd
+const ENV = process.env.NODE_ENV || "development"; //setting node environment variable
+const { mongoUsername, mongoPassword } = require("./db/config");
 const db = mongoose.connection;
+
+ENV === "test"
+  ? mongoose.connect("mongodb://localhost:27017/test", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+  : mongoose.connect(
+      `mongodb+srv://${mongoUsername}:${mongoPassword}@live-art-bgiml.mongodb.net/test?retryWrites=true&w=majority`,
+      { useNewUrlParser: true, useUnifiedTopology: true }
+    ); //checks if node env is test - if so connects to local mongo db else connects to live db
+
+mongoose.set("useCreateIndex", true); //stops collection ensureIndex deprecation warning
+db.on("error", console.error.bind(console, "MongoDB connection error:")); //binds connection to error event
+db.once("open", () => console.log("Connected to the database!")); //once connected log connected
 
 app.use(cors());
 app.use(express.json()); //parsing into JSON
-
-db.on("error", () => console.log("connection error")); //if error connecting log error
-db.once("open", () => console.log("connected to the database!")); //once connected log connected
+app.use("/", apiRouter);
 
 module.exports = app;
