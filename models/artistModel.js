@@ -1,5 +1,7 @@
 const Artist = require("../db/schema");
 
+console.log("in the model");
+
 exports.createArtist = (userInput) => {
   const newArtist = new Artist({
     username: userInput.username,
@@ -10,6 +12,7 @@ exports.createArtist = (userInput) => {
   return newArtist
     .save()
     .then((data) => {
+      console.log(data);
       return data;
     })
     .catch(console.dir);

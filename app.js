@@ -3,13 +3,12 @@ const app = express();
 const cors = require("cors"); //cross-origin resource sharing
 const apiRouter = require("./routers/apiRouter.js");
 const mongoose = require("mongoose");
-const dbConfig = require("./db/config.js"); //database configuration username/pwd
 const ENV = process.env.NODE_ENV || "development"; //setting node environment variable
 const { mongoUsername, mongoPassword } = require("./db/config");
 const db = mongoose.connection;
 
 ENV === "test"
-  ? mongoose.connect("mongodb://localhost:27017/test", {
+  ? mongoose.connect("mongodb://127.0.0.1:27017/test", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
