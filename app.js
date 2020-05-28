@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const ENV = process.env.NODE_ENV || "development"; //setting node environment variable
 const { mongoUsername, mongoPassword } = require("./db/config");
 const db = mongoose.connection;
+const { customErrorHandler, mongoErrorHandling } = require("./errors.js");
 
 ENV === "test"
   ? mongoose.connect("mongodb://127.0.0.1:27017/test", {
@@ -24,5 +25,8 @@ db.once("open", () => console.log("Connected to the database!")); //once connect
 app.use(cors());
 app.use(express.json()); //parsing into JSON
 app.use("/", apiRouter);
+
+app.use(customErrorHandler);
+app.use(mongoErrorHandling);
 
 module.exports = app;

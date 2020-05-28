@@ -30,8 +30,35 @@ describe("/", () => {
             "aboutMe",
             "__v", //version key indicating the revision of the document
           ]);
+        });
+    });
+  });
+  describe("/artist errors", () => {
+    it("POST - an error message is returned when the username already exists", () => {
+      return request(app)
+        .post("/artist")
+        .send({
+          username: "katietest8",
+          password: "tester123",
+          paymentPointer: "4382438hejwh9999",
+          aboutMe: "Hello this is a test description of a username error",
         })
-        .catch(console.dir);
+        .expect(400)
+        .then((error) => {
+          expect(error.body.msg).to.equal("Username already exists!");
+        });
+    });
+    it("status: 405", () => {
+      const invalidMethods = ["patch", "put", "get", "delete"];
+      const methodPromises = invalidMethods.map((method) => {
+        return request(app)
+          [method]("/artist")
+          .expect(405)
+          .then(({ body: { msg } }) => {
+            expect(msg).to.equal("Method not allowed");
+          });
+      });
+      return Promise.all(methodPromises);
     });
   });
   describe("artist/:username", () => {
@@ -50,8 +77,27 @@ describe("/", () => {
           ]);
           expect(body).to.be.an("object");
           expect(body.username).to.equal("katietest8");
-        })
-        .catch(console.dir);
+        });
+    });
+    it("GET - returns status 404 and a relevant error message when the username cannot be found", () => {
+      return request(app)
+        .get("/artist/nickiscool")
+        .expect(404)
+        .then((error) => {
+          expect(error.body.msg).to.equal("Username doesn't exist");
+        });
+    });
+    it("status: 405", () => {
+      const invalidMethods = ["patch", "put", "post", "delete"];
+      const methodPromises = invalidMethods.map((method) => {
+        return request(app)
+          [method]("/artist/:username")
+          .expect(405)
+          .then(({ body: { msg } }) => {
+            expect(msg).to.equal("Method not allowed");
+          });
+      });
+      return Promise.all(methodPromises);
     });
   });
 });

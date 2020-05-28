@@ -5,7 +5,7 @@ exports.postArtist = (req, res, next) => {
     .then((postedArtist) => {
       res.status(201).send(postedArtist);
     })
-    .catch(console.dir);
+    .catch(next);
 };
 
 exports.fetchArtistByUsername = (req, res, next) => {
@@ -14,5 +14,5 @@ exports.fetchArtistByUsername = (req, res, next) => {
     .then((artist) => {
       res.status(200).send(artist);
     })
-    .catch(console.dir);
+    .catch(next);
 };
