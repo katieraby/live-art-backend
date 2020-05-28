@@ -14,3 +14,9 @@ exports.createArtist = (userInput) => {
     })
     .catch(console.dir);
 };
+
+exports.getArtistByUsername = (username) => {
+  return Artist.findOne({ username }).then((artist) => {
+    return artist;
+  });
+};
