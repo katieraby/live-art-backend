@@ -4,12 +4,11 @@ const request = require("supertest");
 const { expect } = require("chai");
 const mongoose = require("mongoose");
 
-//current tests are working, but need to implement re-seeding test DB before each test, because the values must now be changed before testing to ensure values are unique
-
 describe("/artist", () => {
-  // beforeEach(() => {
-  //  ;
-  // });
+  afterEach(async () => {
+    await mongoose.connection.db.dropCollection("artists");
+  });
+
   it("POST - successfully adds new artist to database", () => {
     return request(app)
       .post("/artist")
