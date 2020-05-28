@@ -3,9 +3,9 @@ const {
   postArtist,
   fetchArtistByUsername,
 } = require("../controllers/artistController");
+const { send405Error } = require("../errors");
 
-artistRouter.route("/").get().post(postArtist);
-
-artistRouter.route("/:username").get(fetchArtistByUsername);
+artistRouter.route("/").post(postArtist).all(send405Error);
+artistRouter.route("/:username").get(fetchArtistByUsername).all(send405Error);
 
 module.exports = artistRouter;
