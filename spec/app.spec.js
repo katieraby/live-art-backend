@@ -20,17 +20,7 @@ describe("/", () => {
           paymentPointer: "4382438hejwh8",
           aboutMe: "Hello this is a test description",
         })
-        .expect(201)
-        .then(({ body }) => {
-          expect(body).to.have.keys([
-            "_id", //automatically added id key
-            "username",
-            "password",
-            "paymentPointer",
-            "aboutMe",
-            "__v", //version key indicating the revision of the document
-          ]);
-        });
+        .expect(201);
     });
   });
   describe("/artist errors", () => {
@@ -76,6 +66,7 @@ describe("/", () => {
             "__v", //version key indicating the revision of the document])
           ]);
           expect(body).to.be.an("object");
+          expect(body.password).to.equal(null);
           expect(body.username).to.equal("katietest8");
         });
     });
@@ -87,8 +78,44 @@ describe("/", () => {
           expect(error.body.msg).to.equal("Username doesn't exist");
         });
     });
+    it("POST - returns status 200 and an object containing the artist data relevant to username and password provided", () => {
+      return request(app)
+        .post("/artist/katietest8")
+        .send({ username: "katietest8", password: "tester" })
+        .expect(200)
+        .then(({ body }) => {
+          expect(body).to.have.keys([
+            "_id", //automatically added id key
+            "username",
+            "password",
+            "paymentPointer",
+            "aboutMe",
+            "__v", //version key indicating the revision of the document])
+          ]);
+          expect(body).to.be.an("object");
+          expect(body.username).to.equal("katietest8");
+        });
+    });
+    it("POST - returns status 404 and the relevant error message when an incorrect password has been entered", () => {
+      return request(app)
+        .post("/artist/katietest8")
+        .send({ username: "katietest8", password: "tester123" })
+        .expect(404)
+        .then((error) => {
+          expect(error.body.msg).to.equal("Incorrect password");
+        });
+    });
+    it("POST - returns status 400 and the relevant error message when an invalid username has been entered", () => {
+      return request(app)
+        .post("/artist/nickiscool")
+        .send({ username: "nickiscool", password: "tester123" })
+        .expect(400)
+        .then((error) => {
+          expect(error.body.msg).to.equal("Username not found");
+        });
+    });
     it("status: 405", () => {
-      const invalidMethods = ["patch", "put", "post", "delete"];
+      const invalidMethods = ["patch", "put", "delete"];
       const methodPromises = invalidMethods.map((method) => {
         return request(app)
           [method]("/artist/:username")
