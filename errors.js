@@ -1,5 +1,4 @@
 const customErrorHandler = (err, req, res, next) => {
-  //console.log(err);
   if (err.status !== undefined) {
     res.status(err.status).send({ msg: err.msg });
   } else {
