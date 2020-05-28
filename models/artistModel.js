@@ -10,7 +10,6 @@ exports.createArtist = (userInput) => {
   return newArtist
     .save()
     .then((data) => {
-      console.log(data);
       return data;
     })
     .catch(console.dir);
