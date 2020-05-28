@@ -1,7 +1,5 @@
 const Artist = require("../db/schema");
 
-console.log("in the model");
-
 exports.createArtist = (userInput) => {
   const newArtist = new Artist({
     username: userInput.username,

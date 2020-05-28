@@ -1,6 +1,5 @@
 process.env.NODE_ENV = "test";
 const app = require("../app");
-// const url = "http://localhost:27017";
 const request = require("supertest");
 const { expect } = require("chai");
 const mongoose = require("mongoose");
@@ -9,7 +8,7 @@ const mongoose = require("mongoose");
 
 describe("/artist", () => {
   // beforeEach(() => {
-  //   mongoose.connection.on();
+  //  ;
   // });
   it("POST - successfully adds new artist to database", () => {
     return request(app)
@@ -22,7 +21,6 @@ describe("/artist", () => {
       })
       .expect(201)
       .then(({ body }) => {
-        console.log(body);
         expect(body).to.have.keys([
           "_id", //automatically added id key
           "username",

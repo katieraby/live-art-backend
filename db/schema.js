@@ -8,7 +8,7 @@ const artistSchema = new Schema({
   aboutMe: { type: String, required: false },
 });
 
-module.exports = mongoose.model("Arist", artistSchema);
+module.exports = mongoose.model("Artist", artistSchema);
 //a mongoose model is a wrapper on the mongoose schema.
 //mongoose schema defines the structure of the document, default values etc.
 //mongoose model provides an interface to the db for creating, querying, updating and deleting records.
