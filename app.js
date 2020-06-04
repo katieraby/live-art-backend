@@ -8,6 +8,14 @@ const { mongoUsername, mongoPassword } = require("./db/config");
 const db = mongoose.connection;
 const { customErrorHandler, mongoErrorHandling } = require("./errors.js");
 
+if (!process.env.MONGODB_USERNAME && !process.env.MONGODB_PASSWORD) {
+  mongoUsername = mongoUsername;
+  mongoPassword = mongoPassword;
+} else {
+  mongoUsername = process.env.MONGODB_USERNAME;
+  mongoPassword = process.env.MONGODB_PASSWORD;
+}
+
 ENV === "test"
   ? mongoose.connect("mongodb://127.0.0.1:27017/test", {
       useNewUrlParser: true,
