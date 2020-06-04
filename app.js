@@ -4,11 +4,14 @@ const cors = require("cors"); //cross-origin resource sharing
 const apiRouter = require("./routers/apiRouter.js");
 const mongoose = require("mongoose");
 const ENV = process.env.NODE_ENV || "development"; //setting node environment variable
-const { mongoUsername, mongoPassword } = require("./db/config");
 const db = mongoose.connection;
 const { customErrorHandler, mongoErrorHandling } = require("./errors.js");
 
+let mongoUsername;
+let mongoPassword;
+
 if (!process.env.MONGODB_USERNAME && !process.env.MONGODB_PASSWORD) {
+  const { mongoUsername, mongoPassword } = require("./db/config");
   mongoUsername = mongoUsername;
   mongoPassword = mongoPassword;
 } else {
