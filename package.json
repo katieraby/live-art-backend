@@ -20,14 +20,14 @@
   "homepage": "https://github.com/katieraby/live-art-backend#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "cors": "^2.8.5"
-  },
-  "devDependencies": {
-    "bcrypt": "^4.0.1",
-    "chai": "^4.2.0",
-    "mocha": "^7.2.0",
+    "cors": "^2.8.5",
     "mongodb": "^3.5.7",
     "mongoose": "^5.9.15",
+    "bcrypt": "^4.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.2.0",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   }
