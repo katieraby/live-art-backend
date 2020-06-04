@@ -25,7 +25,7 @@ ENV === "test"
       useUnifiedTopology: true,
     })
   : mongoose.connect(
-      `mongodb+srv://${mongoUsername}:${mongoPassword}@live-art-bgiml.mongodb.net/test?retryWrites=true&w=majority`,
+      `mongodb+srv://${mongoUsername}:${mongoPassword}@live-art-bgiml.mongodb.net/production?retryWrites=true&w=majority`,
       { useNewUrlParser: true, useUnifiedTopology: true }
     ); //checks if node env is test - if so connects to local mongo db else connects to live db
 
