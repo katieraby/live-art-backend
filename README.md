@@ -31,6 +31,11 @@ git clone https://github.com/katieraby/live-art-backend.git
 npm install
 ```
 
+3. For testing, install the required dev dependencies:
+```javascript
+npm i -D mocha chai supertest
+```
+
   ### How to create your dbConfig (required)
   
   To connect to your live mongo database, ensure you set up a config file with your credentials. 
