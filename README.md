@@ -9,10 +9,9 @@ Endpoints available:
 ## Getting Started & Installation
   ### Prerequisites
 
-  To run this API on your machine, you will need Node.js and Postgres installed on your machine.
+  To run this API on your machine, you will need Node.js and MongoDB installed on your machine.
 
-  To install Postgres, go to: https://www.postgresql.org/download/ \
-  The version required is a minimum of v. 12.1
+  To install Mongo, go to https://docs.mongodb.com/manual/installation/
 
   To install Node, go to: https://nodejs.org/en/download/ \
   The version required is a minimum of v. 13.8.0
