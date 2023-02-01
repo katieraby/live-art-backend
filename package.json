@@ -22,7 +22,7 @@
     "express": "^4.17.1",
     "cors": "^2.8.5",
     "mongodb": "^3.5.7",
-    "mongoose": "^5.9.15",
+    "mongoose": "^5.13.15",
     "bcrypt": "^4.0.1"
   },
   "devDependencies": {
